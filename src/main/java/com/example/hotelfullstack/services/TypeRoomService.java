@@ -27,19 +27,21 @@ public class TypeRoomService {
 
     public TypeRoom getTypeRoomById(Long id) {
         return typeRoomRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Not found type room"));
+//                () -> new ResourceNotFoundException("Not found type room")
+        );
     }
 
     public TypeRoom updateTypeRoom(Long id, TypeRoom typeRoom) {
         TypeRoom updatedTypeRoom = typeRoomRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Not found type room"));
+//                () -> new ResourceNotFoundException("Not found type room")
+        );
         updatedTypeRoom.setName(typeRoom.getName());
         return typeRoomRepository.save(updatedTypeRoom);
     }
 
     public void deleteTypeRoom(Long id) {
         TypeRoom typeRoom = typeRoomRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("not found type room")
+//                () -> new ResourceNotFoundException("not found type room")
         );
         typeRoomRepository.delete(typeRoom);
     }

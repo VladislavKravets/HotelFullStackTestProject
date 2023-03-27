@@ -1,55 +1,45 @@
 package com.example.hotelfullstack.controllers;
 
-import com.example.hotelfullstack.models.AppError;
+import com.example.hotelfullstack.dtos.ClientDTO;
+import com.example.hotelfullstack.exceptions.IllegalArgumentException;
+import com.example.hotelfullstack.mapper.ClientMapper;
 import com.example.hotelfullstack.models.Client;
 import com.example.hotelfullstack.services.ClientService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/clients")
+@RequiredArgsConstructor
 public class ClientController {
     private final ClientService clientService;
-
-    public ClientController(ClientService clientService) {
-        this.clientService = clientService;
-    }
+    private final ClientMapper clientMapper;
 
     @GetMapping
-    public ResponseEntity<List<Client>> getAllClients() {
-        List<Client> clients = clientService.getAllClients();
-        return new ResponseEntity<>(clients, HttpStatus.OK);
+    public List<Client> getAllClients() {
+        return clientService.getAllClients();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getClientById(@PathVariable Long id) {
-        try {
-            Client client = clientService.getClientById(id);
-            return new ResponseEntity<>(client, HttpStatus.OK);
-        } catch (Exception e){
-            return new ResponseEntity<>(
-                    new AppError(HttpStatus.NOT_FOUND.value(),
-                            "Client with id " + id + " not found"),
-                    HttpStatus.NOT_FOUND);
-        }
+    public Client getClientById(@PathVariable Long id) {
+        return clientService.getClientById(id);
     }
 
     @PostMapping
-    public ResponseEntity<Client> createClient(@RequestBody Client client) {
-        return new ResponseEntity<>(clientService.createClient(client), HttpStatus.CREATED);
+    public Client createClient(@RequestBody @Valid ClientDTO clientDTO) {
+        return clientService.createClient(clientMapper.toObject(clientDTO));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Client> updateClient(@PathVariable Long id, @RequestBody Client client) {
-        return new ResponseEntity<>(clientService.updateClient(id, client), HttpStatus.OK);
+    public Client updateClient(@PathVariable Long id, @RequestBody @Valid ClientDTO clientDTO) {
+        return clientService.updateClient(id, clientDTO);
     }
 
     @DeleteMapping("/{id}")
     public void deleteClient(@PathVariable Long id) {
         clientService.deleteClient(id);
-        //return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

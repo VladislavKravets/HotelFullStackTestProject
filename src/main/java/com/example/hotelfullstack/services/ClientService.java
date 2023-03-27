@@ -1,46 +1,46 @@
 package com.example.hotelfullstack.services;
 
+import com.example.hotelfullstack.dtos.ClientDTO;
 import com.example.hotelfullstack.exceptions.ResourceNotFoundException;
 import com.example.hotelfullstack.models.Client;
 import com.example.hotelfullstack.repositories.ClientRepository;
-import lombok.SneakyThrows;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ClientService {
     private final ClientRepository clientRepository;
-
-    public ClientService(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
-    }
+    private final ModelMapper modelMapper = new ModelMapper();
 
     public List<Client> getAllClients() {
         return clientRepository.findAll();
     }
 
     public Client getClientById(Long id) {
-        return clientRepository.findById(id).orElseThrow();
+        return clientRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Client not found id : " + id)
+        );
     }
 
     public Client createClient(Client client) {
         return clientRepository.save(client);
     }
 
-    public Client updateClient(Long id, Client client) {
+    public Client updateClient(Long id, ClientDTO clientDTO) {
         Client updatedClient = clientRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Not found Client")
+                () -> new ResourceNotFoundException("Client not found id : " + id)
         );
-        updatedClient.setFullName(client.getFullName());
-        updatedClient.setPassport(client.getPassport());
-        updatedClient.setPhone(client.getPhone());
-        return updatedClient;
+        modelMapper.map(clientDTO, updatedClient); // copy field
+        return clientRepository.save(updatedClient);
     }
 
     public void deleteClient(Long id) {
         Client client = clientRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Not found Client")
+                () -> new ResourceNotFoundException("Client not found id : " + id)
         );
         clientRepository.delete(client);
     }

@@ -12,6 +12,7 @@ import lombok.*;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.NONE)
     private Long id;
     private String fullName;
     private String passport;

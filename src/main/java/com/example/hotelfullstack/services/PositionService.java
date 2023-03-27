@@ -27,12 +27,14 @@ public class PositionService {
 
     public Position getPositionById(Long id) {
         return positionRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Not found position"));
+//                () -> new ResourceNotFoundException("Not found position")
+        );
     }
 
     public Position updatePosition(Long id, Position position) {
         Position updatedPosition = positionRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Not found position"));
+//                () -> new ResourceNotFoundException("Not found position")
+        );
         updatedPosition.setName(position.getName());
         updatedPosition.setSalary(position.getSalary());
         updatedPosition.setResponsibilities(position.getResponsibilities());
@@ -41,7 +43,7 @@ public class PositionService {
 
     public void deletePosition(Long id) {
         Position position = positionRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("not found position")
+//                () -> new ResourceNotFoundException("not found position")
         );
         positionRepository.delete(position);
     }

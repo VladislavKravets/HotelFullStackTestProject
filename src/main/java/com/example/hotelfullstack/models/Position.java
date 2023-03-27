@@ -13,6 +13,7 @@ import lombok.*;
 public class Position {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.NONE)
     private Long id;
 
     private String name;

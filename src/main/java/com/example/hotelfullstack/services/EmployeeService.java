@@ -1,6 +1,6 @@
 package com.example.hotelfullstack.services;
 
-import com.example.hotelfullstack.DTOs.EmployeeDTO;
+import com.example.hotelfullstack.dtos.EmployeeDTO;
 import com.example.hotelfullstack.exceptions.ResourceNotFoundException;
 import com.example.hotelfullstack.models.Employee;
 import com.example.hotelfullstack.models.Position;
@@ -28,7 +28,8 @@ public class EmployeeService {
 
     public Employee getEmployeeById(Long id) {
         return employeeRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Employee not found"));
+//                () -> new ResourceNotFoundException("Employee not found")
+        );
     }
 
     public Employee createEmployee(EmployeeDTO employeeDTO, Long positionId) {
@@ -48,9 +49,11 @@ public class EmployeeService {
 
     public Employee updateEmployee(Long id, EmployeeDTO employeeDTO, Long positionId) {
         Employee employee = employeeRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Employee not found"));
-        Position position = positionRepository.findById(positionId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid position ID"));
+//                () -> new ResourceNotFoundException("Employee not found")
+        );
+        Position position = positionRepository.findById(positionId).orElseThrow(
+//                () -> new IllegalArgumentException("Invalid position ID")
+        );
 
         employee.setFullName(employeeDTO.getFullName());
         employee.setDateOfBirth(employeeDTO.getDateOfBirth());
@@ -64,7 +67,8 @@ public class EmployeeService {
     public String deleteEmployee(Long id) {
         try {
             Employee employee = employeeRepository.findById(id).orElseThrow(
-                    () -> new ResourceNotFoundException("Employee not found"));
+//                    () -> new ResourceNotFoundException("Employee not found")
+            );
             employeeRepository.delete(employee);
             return "Employee deleted successfully";
         } catch (ResourceNotFoundException ex) {

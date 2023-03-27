@@ -1,6 +1,6 @@
 package com.example.hotelfullstack.controllers;
 
-import com.example.hotelfullstack.DTOs.EmployeeDTO;
+import com.example.hotelfullstack.dtos.EmployeeDTO;
 import com.example.hotelfullstack.models.Employee;
 import com.example.hotelfullstack.services.EmployeeService;
 import org.springframework.http.HttpStatus;
@@ -8,13 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import org.modelmapper.ModelMapper;
 
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
     private final EmployeeService employeeService;
-    private static final ModelMapper modelMapper = new ModelMapper();
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }

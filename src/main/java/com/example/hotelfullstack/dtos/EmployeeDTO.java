@@ -1,4 +1,4 @@
-package com.example.hotelfullstack.DTOs;
+package com.example.hotelfullstack.dtos;
 
 import lombok.*;
 
@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @ToString
 public class EmployeeDTO {
+    @Setter(AccessLevel.NONE)
     private Long id;
     private String fullName;
     private LocalDate dateOfBirth;

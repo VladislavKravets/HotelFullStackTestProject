@@ -1,4 +1,4 @@
-package com.example.hotelfullstack.DTOs;
+package com.example.hotelfullstack.dtos;
 
 import lombok.*;
 
@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class PositionDTO {
+    @Setter(AccessLevel.NONE)
     private Long id;
     private String name;
     private Double salary;

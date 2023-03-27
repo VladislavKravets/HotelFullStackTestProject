@@ -1,6 +1,6 @@
 package com.example.hotelfullstack.controllers;
 
-import com.example.hotelfullstack.DTOs.RoomDTO;
+import com.example.hotelfullstack.dtos.RoomDTO;
 import com.example.hotelfullstack.models.Room;
 import com.example.hotelfullstack.services.RoomService;
 import org.springframework.http.HttpStatus;
