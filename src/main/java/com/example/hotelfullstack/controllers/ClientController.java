@@ -1,7 +1,6 @@
 package com.example.hotelfullstack.controllers;
 
 import com.example.hotelfullstack.dtos.ClientDTO;
-import com.example.hotelfullstack.exceptions.IllegalArgumentException;
 import com.example.hotelfullstack.mapper.ClientMapper;
 import com.example.hotelfullstack.models.Client;
 import com.example.hotelfullstack.services.ClientService;
@@ -30,7 +29,7 @@ public class ClientController {
 
     @PostMapping
     public Client createClient(@RequestBody @Valid ClientDTO clientDTO) {
-        return clientService.createClient(clientMapper.toObject(clientDTO));
+        return clientService.createClient(clientMapper.toClient(clientDTO));
     }
 
     @PutMapping("/{id}")

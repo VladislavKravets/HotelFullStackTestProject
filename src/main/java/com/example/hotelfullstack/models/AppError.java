@@ -1,20 +1,16 @@
 package com.example.hotelfullstack.models;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 @AllArgsConstructor
-public class ErrorObject {
-
+public class AppError {
     private int status;
-
     private String message;
-
     private Date timestamp;
-
 }
