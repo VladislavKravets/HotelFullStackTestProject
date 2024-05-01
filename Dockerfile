@@ -36,6 +36,6 @@ LABEL org.name="hezf"
 # Package stage
 #
 FROM eclipse-temurin:17-jdk-jammy
-COPY --from=build /home/gradle/src/build/libs/demo-1.jar app.jar
+COPY --from=build /home/gradle/src/build/libs/autosalon-1.jar app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
 
